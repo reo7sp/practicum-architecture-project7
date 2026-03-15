@@ -1,0 +1,6 @@
+.venv
+venv
+*.pyc
+__pycache__
+Task3/chroma_db/
+*.sqlite3
