@@ -8,13 +8,13 @@ install:
 	$(ACTIVATE) && pip install -q -r requirements.txt
 
 generate:
-	$(ACTIVATE) && python3 scripts/generate_terms_map.py
+	$(ACTIVATE) && python3 generate_terms_map.py
 
 scrape:
-	$(ACTIVATE) && python3 scripts/scraper.py
+	$(ACTIVATE) && python3 scraper.py
 
 replace:
-	$(ACTIVATE) && python3 scripts/replace_terms.py
+	$(ACTIVATE) && python3 replace_terms.py
 
 clean:
 	rm -rf raw_data/ knowledge_base/

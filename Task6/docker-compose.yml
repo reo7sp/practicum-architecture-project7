@@ -1,0 +1,15 @@
+services:
+  index-updater:
+    build:
+      context: ..
+      dockerfile: Task6/Dockerfile
+    container_name: rag-index-updater
+    volumes:
+      - ../Task2/chroma_db:/data/chroma_db
+      - ./logs:/data/logs
+    environment:
+      CRON_SCHEDULE: "0 6 * * *"
+      REPO_URL: https://github.com/reo7sp/practicum-architecture-project7
+      REPO_BRANCH: rag
+      REPO_KNOWLEDGE_BASE_DIR: Task2/knowledge_base
+    restart: unless-stopped

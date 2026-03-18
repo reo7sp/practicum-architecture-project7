@@ -11,15 +11,13 @@ ollama serve
 ollama pull qwen2.5
 ```
 
-## Использование
-
-Консольный бот:
+## Запуск (console)
 
 ```bash
 make console
 ```
 
-Telegram бот:
+## Запуск (telegram)
 
 ```bash
 export TELEGRAM_BOT_TOKEN=your_token_here
