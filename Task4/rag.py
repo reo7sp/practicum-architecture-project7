@@ -100,7 +100,7 @@ class RAGBot:
             }
 
     def _retrieve_context(self, query: str) -> List[Document]:
-        return self.vectorstore.similarity_search(query, k=3)
+        return self.vectorstore.similarity_search(query, k=5)
 
     def _filter_context(self, context_docs: List[Document]) -> List[Document]:
         result = []

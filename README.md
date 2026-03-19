@@ -8,4 +8,5 @@
 | Задание 4. RAG-бот с техниками промптинга | [README](./Task4/README.md) | [Makefile](./Task4/Makefile) |
 | Задание 5. Запуск и демонстрация работы бота | [README](./Task5/README.md) | [Makefile](./Task5/Makefile) |
 | Задание 6. Автоматическое ежедневное обновление базы знаний | [README](./Task6/README.md) | [Makefile](./Task6/Makefile) |
+| Задание 7. Аналитика покрытия и качества базы знаний | [README](./Task7/README.md) | [Makefile](./Task7/Makefile) |
 

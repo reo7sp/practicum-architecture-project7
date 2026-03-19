@@ -1,0 +1,77 @@
+- id: A-01
+  question: Кто такой Drake Vex?
+  expected_answer: true
+  coverage_status: known
+  keywords: [персонаж, Jabba, Koreon, Star Wars, криминальн, smuggler, контрабандист]
+
+- id: A-02
+  question: Что такое Nexus Hawk?
+  expected_answer: true
+  coverage_status: known
+  keywords: [корабль, YT-1300, Drake, Kessel, freighter]
+
+- id: A-03
+  question: Кто такие Sentinels и каковы их принципы?
+  expected_answer: true
+  coverage_status: known
+  keywords: [орден, Sentinel, Synth, Jedi, мир]
+
+- id: A-04
+  question: Что такое Void Core и для чего он использовался?
+  expected_answer: true
+  coverage_status: known
+  keywords: [военн, уничтожен, Jedha, Dominion, оружие, Death Star, боевая]
+
+- id: A-05
+  question: Кто такой Kael Thornix?
+  expected_answer: true
+  coverage_status: known
+  keywords: [персонаж, Sentinel, Luke, Liberation, Velgor, Thornix, герой]
+
+- id: A-06
+  question: Что такое Shadow Order?
+  expected_answer: true
+  coverage_status: known
+  keywords: [Shadow Order, Sith, тёмн, Velgor]
+
+- id: A-07
+  question: Расскажи о Dominion Collective — что это за организация?
+  expected_answer: true
+  coverage_status: known
+  keywords: [Dominion, Empire, Galactic, Imperial, организаци, галактическ, правительств]
+
+- id: A-08
+  question: Кто такой Xarn Velgor и какова его роль в истории?
+  expected_answer: true
+  coverage_status: known
+  keywords: [Velgor, Vader, Dominion, тёмн]
+
+- id: B-01
+  question: Кто такой верный компаньон-Ursanii Drake Vex и какова его история?
+  expected_answer: false
+  coverage_status: missing
+  keywords: []
+
+- id: B-02
+  question: Что такое The Synth, как оно ощущается и как им управляют Sentinels?
+  expected_answer: true
+  coverage_status: missing
+  keywords: [Synth, энергетическ, Sentinel, поле, живых, существ]
+
+- id: B-03
+  question: Как устроен Plasma Blade и из чего он изготовлен?
+  expected_answer: true
+  coverage_status: missing
+  keywords: [Plasma, Blade, оружие, лезви, мечевое, плазм]
+
+- id: C-01
+  question: Расскажи о мидихлорианах во вселенной Void Chronicles
+  expected_answer: false
+  coverage_status: never
+  keywords: []
+
+- id: C-02
+  question: Кто такой Дин Джарин и какое отношение он имеет к Void Chronicles?
+  expected_answer: false
+  coverage_status: never
+  keywords: []
