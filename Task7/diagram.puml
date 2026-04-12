@@ -1,0 +1,94 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+skinparam ParticipantPadding 20
+skinparam responseMessageBelowArrow true
+
+title Задание 7. Аналитика покрытия и качества базы знаний
+
+actor       "Тест (pytest)"        as Eval
+participant "RAGBot"               as Bot
+participant "ChromaDB"             as Chroma
+participant "Ollama LLM"           as LLM
+database    "logs.jsonl"           as Log
+
+== Инициализация ==
+
+Eval -> Bot : RAGBot()
+Bot -> Chroma : подключение к индексу
+note right of Chroma
+  **Точка отказа 1**
+  Индекс пуст или недоступен
+end note
+Chroma --> Bot : vectorstore готов
+
+== Цикл по золотым вопросам ==
+
+loop для каждого вопроса из golden_questions.yaml
+
+    Eval -> Bot : generate_response(query)
+    Bot -> Chroma : similarity_search(query, k=3)
+
+    alt Чанки не найдены
+        Chroma --> Bot : []
+        Bot --> Eval : "Я не знаю..."
+        note right of Bot #LightYellow
+          **Точка отказа 2**
+          Сущность удалена из базы
+          или никогда не индексировалась
+        end note
+
+    else Чанки найдены
+        Chroma --> Bot : [doc1, doc2, doc3]
+        Bot -> Bot : _filter_context(chunks)
+
+        alt Чанк содержит инъекцию
+            note right of Bot #LightPink
+              **Точка отказа 3**
+              Prompt injection —
+              чанк обрезается или отбрасывается
+            end note
+            Bot -> Bot : _strip_injection_from_chunk()
+        end
+
+        alt Все чанки отброшены
+            Bot --> Eval : "Я не могу ответить..."
+        end
+
+        Bot -> LLM : POST /api/chat
+
+        alt LLM недоступна
+            LLM --> Bot : ConnectionError
+            note right of LLM #LightPink
+              **Точка отказа 4**
+              Ollama не запущена или таймаут
+            end note
+            Bot --> Eval : "Ошибка: ..."
+
+        else LLM ответила
+            LLM --> Bot : ответ
+            Bot -> Bot : _response_contains_leak()
+
+            alt Утечка секрета в ответе
+                note right of Bot #LightPink
+                  **Точка отказа 5**
+                  RAG-защита подавляет ответ
+                end note
+                Bot --> Eval : "Я не могу ответить..."
+
+            else Чистый ответ
+                Bot --> Eval : { answer, reasoning, sources }
+            end
+        end
+    end
+
+    Eval -> Eval : is_success(answer, expected, keywords)
+    Eval -> Log : запись в logs.jsonl
+
+end
+
+== Итог ==
+
+Eval -> Eval : вывод отчёта по блокам A / B / C
+
+@enduml

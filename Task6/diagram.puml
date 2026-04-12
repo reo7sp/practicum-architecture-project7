@@ -1,0 +1,18 @@
+@startuml
+!include <C4/C4_Container>
+
+title Задание 6. Автоматическое ежедневное обновление базы знаний
+
+System_Boundary(task6, "Index updater system") {
+  Container(updater, "index-updater", "Docker (python+cron)", "Запускает `cron` ежедневно (06:00 UTC) и выполняет `update.sh`/`build_index.py` для синхронизации индекса Chroma.")
+  Container(chromaVol, "Chroma DB", "Persisted volume (mount)", "")
+  Container(logsVol, "Логи", "Persisted volume (mount)", "")
+}
+
+Container(github, "GitHub", "Git-репозиторий", "")
+
+Rel(updater, github, "клонирует документы из git")
+Rel(updater, chromaVol, "синхронизирует векторный индекс (add/delete chunks)", "Chroma")
+Rel(updater, logsVol, "записывает логи", "файлы")
+
+@enduml
